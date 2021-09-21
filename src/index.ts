@@ -220,7 +220,7 @@ const handleError = (error: any): object => {
     }
 };
 
-export const gifyu = async (
+const gifyu = async (
     input:
         | string
         | string[]
@@ -290,4 +290,8 @@ export const gifyu = async (
     } catch (error: any) {
         return handleError(error);
     }
+};
+
+export {
+    gifyu
 };

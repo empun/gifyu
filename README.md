@@ -9,9 +9,9 @@ npm install gifyu
 
 - Import Gifyu
 ```javascript
-const gifyu  = require('gifyu') 
+const { gifyu }  = require('gifyu') 
 // or
-import gifyu from 'gifyu' 
+import { gifyu } from 'gifyu' 
 ```
 
 ## Usage
