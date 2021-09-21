@@ -1,0 +1,38 @@
+{
+  "name": "gifyu",
+  "version": "1.0.0",
+  "description": "Unofficial API of gifyu.com. Free hosting for images 🚀.",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "prepare": "npm run build"
+  },
+  "keywords": [
+    "gifyu",
+    "gifyu api",
+    "image host",
+    "free hosting",
+    "dropbox"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/empun/gifyu.git"
+  },
+  "author": "Arif",
+  "license": "ISC",
+  "homepage": "https://github.com/empun/gifyu#readme",
+  "dependencies": {
+    "axios": "^0.21.4",
+    "form-data": "^4.0.0",
+    "is-url": "^1.2.4"
+  },
+  "devDependencies": {
+    "@types/axios": "^0.14.0",
+    "@types/is-url": "^1.2.30",
+    "@types/node": "^16.9.2",
+    "axios-logger": "^2.5.0",
+    "ts-node": "^10.2.1",
+    "typescript": "^4.4.3"
+  }
+}
