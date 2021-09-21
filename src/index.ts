@@ -122,21 +122,6 @@ const getFormPostAlbum = (
     return { form, headers, cookie };
 };
 
-const getFormAuth = (
-    { auth_token, cookie }: Credential,
-    email: string,
-    password: string
-): { form: FormData, headers: object; } => {
-    const form = new FormData();
-    form.append('login-subject', email);
-    form.append('password', password);
-    form.append('auth_token', auth_token);
-
-    const headers = getFormHeaders(form, cookie);
-
-    return { form, headers };
-};
-
 const postImage = async (input: string | ImageInput, credential: Credential) => {
     let formParam: FormParam;
     if (typeof input === 'string') {
