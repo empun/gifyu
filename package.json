@@ -1,6 +1,6 @@
 {
   "name": "gifyu",
-  "version": "1.0.0",
+  "version": "1.0.4",
   "description": "Unofficial API of gifyu.com. Free hosting for images 🚀.",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",

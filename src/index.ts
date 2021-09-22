@@ -245,9 +245,7 @@ const gifyu = async (
             } else {
                 return data;
             }
-        }
-
-        if (Array.isArray(input as string[])) {
+        } else if (Array.isArray(input as string[])) {
             const data = await postImages(input as string[], credential);
             if (album) {
                 const idImages = (data.success as Array<any>).map(val => {
@@ -265,13 +263,9 @@ const gifyu = async (
             } else {
                 return data;
             }
-        }
-
-        if ((object: any): object is ImageInput => 'source' in object) {
+        } else {
             return await postImage(input as ImageInput, credential);
         }
-
-        return { ok: false, data: [] };
     } catch (error: any) {
         return handleError(error);
     }
