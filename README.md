@@ -1,6 +1,7 @@
 # GIFYU :framed_picture:
-Unofficial API of [gifyu.com](https://gifyu.com). Free hosting for images 🚀. <br>
 [![npm version](https://badge.fury.io/js/gifyu.svg)](https://badge.fury.io/js/gifyu)
+
+Unofficial API of [gifyu.com](https://gifyu.com). Free hosting for images 🚀.
 
 ## Get Started 
 - Install Gifyu
