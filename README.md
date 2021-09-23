@@ -1,4 +1,6 @@
 # GIFYU :framed_picture:
+[![Code Quality Score](https://www.code-inspector.com/project/29149/status/svg)](https://frontend.code-inspector.com/public/project/29149/gifyu/dashboard)
+[![Code Quality Score](https://www.code-inspector.com/project/29149/score/svg)](https://frontend.code-inspector.com/public/project/29149/gifyu/dashboard)
 [![npm version](https://badge.fury.io/js/gifyu.svg)](https://badge.fury.io/js/gifyu)
 
 Unofficial API of [gifyu.com](https://gifyu.com). Free hosting for images 🚀.
