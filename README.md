@@ -2,7 +2,7 @@
 [![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/empun/gifyu.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/empun/gifyu/context:javascript)
 [![Code Quality Score](https://www.code-inspector.com/project/29149/score/svg)](https://frontend.code-inspector.com/public/project/29149/gifyu/dashboard)
 [![npm version](https://badge.fury.io/js/gifyu.svg)](https://badge.fury.io/js/gifyu)
-[![NPM Downloads](https://badge.fury.io/js/gifyu.svg)](https://img.shields.io/npm/dw/gifyu)
+[![NPM Downloads](https://badge.fury.io/js/gifyu)](https://img.shields.io/npm/dw/gifyu)
 
 Unofficial API of [gifyu.com](https://gifyu.com). Free hosting for images 🚀.
 
