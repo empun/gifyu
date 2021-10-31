@@ -10,7 +10,7 @@ client.interceptors.request.use(config => {
     const message = `${config.method?.toUpperCase()} request sent to ${config.baseURL}${config.url} at ${new Date().toLocaleTimeString()}`;
     if (config.url !== '/') {
         console.log(message);
-    }
+    } 
     return config;
 }, error => {
     Promise.reject(error);
@@ -116,7 +116,7 @@ const getFormPostAlbum = (
     form.append('album[privacy]', albumPrivacy);
     if (albumPrivacy === 'password') {
         form.append('album[password]', albumPassword);
-    }
+    } 
     const headers = getFormHeaders(form, cookie);
 
     return { form, headers, cookie };
