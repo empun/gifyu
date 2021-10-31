@@ -9,10 +9,8 @@
     "rootDir": "./src",
     "outDir": "./lib",
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "lib": ["ES2020.Promise"]
   },
-  "exclude": [
-    "./node_modules",
-    "./lib"
-  ]
+  "exclude": ["./node_modules", "./lib"]
 }
