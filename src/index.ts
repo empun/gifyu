@@ -6,14 +6,17 @@ import fs from 'fs';
 const baseURL: string = 'https://gifyu.com';
 
 const client = axios.create({ baseURL });
+
 client.interceptors.request.use(
   (config) => {
     const message = `${config.method?.toUpperCase()} request sent to ${
       config.baseURL
     }${config.url} at ${new Date().toLocaleTimeString()}`;
+
     if (config.url !== '/') {
       console.log(message);
     }
+
     return config;
   },
   (error) => {
@@ -46,6 +49,7 @@ const getCredential = async (): Promise<Credential> => {
       .split('PF.obj.config.auth_token = ')[1]
       .split('"')[1];
     const cookie = response.headers['set-cookie'][0].split(';')[0];
+
     return { authToken, cookie };
   } catch (error: any) {
     throw new Error(error.message);
@@ -114,6 +118,7 @@ const getFormPostAlbum = (
   albumPassword?: string
 ): { form: FormData; headers: object; cookie: string } => {
   const form = new FormData();
+
   form.append('auth_token', authToken);
   form.append('action', 'create-album');
   form.append('type', 'images');
@@ -129,6 +134,7 @@ const getFormPostAlbum = (
   if (albumPrivacy === 'password') {
     form.append('album[password]', albumPassword);
   }
+
   const headers = getFormHeaders(form, cookie);
 
   return { form, headers, cookie };
@@ -139,6 +145,7 @@ const postImage = async (
   credential: Credential
 ) => {
   let formParam: FormParam;
+
   if (typeof input === 'string') {
     formParam = {
       type: typeof input === 'string' && isUrl(input) ? 'url' : 'file',
@@ -155,6 +162,7 @@ const postImage = async (
       description: input.description
     };
   }
+
   const { form, headers, cookie } = await getFormPostImage(
     credential,
     formParam
@@ -168,6 +176,7 @@ const postImage = async (
 
   const { data } = await client.post('/json', form, headers);
   data.request.cookie = cookie;
+
   return data;
 };
 
@@ -178,25 +187,21 @@ const postImages = async (input: string[], credential: Credential) => {
   const success: Array<object> = [];
   const failed: Array<object> = [];
 
-  result.map((val) => {
+  result.forEach((val) => {
     if (val.status === 'fulfilled') {
       success.push(val.value);
     } else {
-      if (val.reason.toString().includes('No such file or directory')) {
-        const error = {
-          status_code: 400,
-          error: {
-            message: val.reason.toString().split('at')[0]
-          }
-        };
-        failed.push(error);
-      } else {
-        delete val.reason.response.data.request;
-        delete val.reason.response.data.status_txt;
-        failed.push(val.reason.response.data);
-      }
+      const error = {
+        status_code: 400,
+        error: {
+          message: 'Error uploading file'
+        }
+      };
+
+      failed.push(error);
     }
   });
+
   return { success, failed };
 };
 
@@ -225,14 +230,14 @@ const createAlbum = async (
 const handleError = (error: any): object => {
   if (error.response) {
     return error.response.data;
-  } else {
-    return {
-      status_code: 400,
-      error: {
-        message: error.message
-      }
-    };
   }
+
+  return {
+    status_code: 400,
+    error: {
+      message: error.message
+    }
+  };
 };
 
 const gifyu = async (
@@ -261,6 +266,7 @@ const gifyu = async (
 
     if (typeof input === 'string') {
       const data = await postImage(input, credential);
+
       if (album) {
         const idImages = data.image.url_viewer.split('/')[4];
         const dataAlbum = await createAlbum(
@@ -271,16 +277,20 @@ const gifyu = async (
           album.description,
           album.privacy === 'password' ? album.password : ''
         );
+
         return { data, dataAlbum };
-      } else {
-        return data;
       }
-    } else if (Array.isArray(input as string[])) {
+
+      return data;
+    }
+
+    if (Array.isArray(input as string[])) {
       const data = await postImages(input as string[], credential);
+
       if (album) {
-        const idImages = (data.success as Array<any>).map((val) => {
-          return val.image.url_viewer.split('/')[4];
-        });
+        const idImages = (data.success as Array<any>).map(
+          (val) => val.image.url_viewer.split('/')[4]
+        );
         const dataAlbum = await createAlbum(
           credential,
           idImages,
@@ -289,13 +299,14 @@ const gifyu = async (
           album.description,
           album.privacy === 'password' ? album.password : ''
         );
+
         return { data, dataAlbum };
-      } else {
-        return data;
       }
-    } else {
-      return await postImage(input as ImageInput, credential);
+
+      return data;
     }
+
+    return await postImage(input as ImageInput, credential);
   } catch (error: any) {
     return handleError(error);
   }
